@@ -1,0 +1,77 @@
+{% extends 'user_navbar.html' %}
+
+{% block title %} Resume Upload {% endblock %}
+{% block job_list %} active {% endblock %}
+{% block css %}
+{% endblock %}
+{% block body %}
+<style>    
+	label { color:#628E90; font-weight: 600; font-size: 20px;}
+    .form-wrapp {
+        background: linear-gradient(#D7E1EC,#FFFFFF);
+        width: 80%; text-align: left;
+    }
+    .nav-header {
+        padding: 15px 30px 12px 30px !important; background-color: #52787a; margin: 0 !important;
+        text-align: center;
+    } 
+    .nav-header h2 { font-size: 38px; letter-spacing: 1.5px; font-family: 'Poppins', sans-serif; font-weight: 600;  color: white;}
+
+</style> 
+<br><center>
+<div class="form-wrapp">
+	<div class="nav-header">
+		<h2>Job Application Form</h2>
+	</div><br>
+<form method="POST" enctype="multipart/form-data" style="padding: 0 20px;"> {% csrf_token %}
+    <div class="form-row">
+        <label>Upload Resume</label>
+        <input type="file" class="form-control mt-3" name="resume" id="resume">
+    </div><br>
+    <input type="submit" value="Submit" class="btn submit-btn">
+</form><br>
+</div>
+</center><br>
+{% endblock %}
+{% block js %}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {% if alert %}
+        <script>
+            Swal.fire({
+		  icon: 'success',
+		  title:'Resume Submitted Successfully',
+		  text: '',
+		  backdrop: 'rgba(61,60,60,1)',
+		  confirmButtonColor: '#38a8d4'
+	  }).then(function() {
+		window.location.href = "/all_jobs/";
+	});
+        </script> 
+    {% elif closed %}
+        <script>
+            Swal.fire({
+		  icon: 'error',
+		  title:'Date for applying has been closed',
+		  text: '',
+		  backdrop: 'rgba(61,60,60,1)',
+		  confirmButtonColor: '#38a8d4'
+	  }).then(function() {
+		window.location.href = "/all_jobs/";
+	});
+        </script> 
+    {% elif notopen %}
+        <script>
+            Swal.fire({
+		  icon: 'error',
+		  title:'Date for applying has not yet started',
+		  text: '',
+		  backdrop: 'rgba(61,60,60,1)',
+		  confirmButtonColor: '#38a8d4'
+	  }).then(function() {
+		window.location.href = "/all_jobs/";
+	});
+        </script> 
+    {% endif %}
+
+{% endblock %}
+

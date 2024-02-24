@@ -1,0 +1,56 @@
+{% extends 'admin_navbar.html' %}
+
+{% block title %} Admission System {% endblock %}
+{% block application_form %} active {% endblock %}
+{% block css %}
+{% endblock %}
+{% block body %}
+<style>
+    body { background: lightgray;}
+</style>
+<br><center>
+<div class="form-wrapp">
+    <div class="nav-header">
+        <h2><i class="fa-solid fa-pen-to-square spacicon"></i> UPDATE COMPANY</h2>
+    </div>
+<form method="POST"> {% csrf_token %}
+
+    <div class="container mt-5">
+        <div class="mb-3" style="margin-top: -20px;">
+            <label for="username" class="form-label label-dsgn">Company Name</label>
+            <input type="text" class="form-control" id="company_name" name="company_name" value="{{company.company_name}}"readonly>
+        </div><br> 
+        <div class="mb-3">
+            <label for="password" class="form-label label-dsgn">Status</label>
+            <select name="status" id="status" class="form-control">
+                <option value="Accepted">Accept Company</option>
+                <option value="Rejected">Reject Company</option>
+            </select>
+        </div>
+        <br>
+        <button type="button" class="back-btn btn" onclick="history.back()">Cancel</button>
+        <input type="submit" value=" Submit " class="submit-btn btn">
+        <br><br>
+    </div>
+</form>
+</div>
+</center><br>
+{% endblock %}
+{% block js %}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    {% if alert %}
+        <script>
+            Swal.fire({
+		  icon: 'success',
+		  title:'Status Changed Successfully',
+		  text: '',
+		  backdrop: 'rgba(61,60,60,1)',
+		  confirmButtonColor: '#38a8d4'
+	  }).then(function() {
+		window.location.href = "/all_companies/";
+	});
+            
+        </script>
+    {% endif %}
+{% endblock %}

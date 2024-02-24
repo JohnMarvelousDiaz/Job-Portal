@@ -1,0 +1,194 @@
+{% extends 'basic.html'%}
+{% include 'job_list.html'%}
+
+{% block title %} Job Portal {% endblock %}
+{% block home %} active {% endblock %}
+
+
+{% block css %}
+{% endblock %}
+{% block body %}
+{% load static %}   
+ {% comment %}----Main Section----{% endcomment %}
+<style>
+  footer {
+    display: flex; justify-content: center; align-items: center; background-color: #373944;
+    font-size: 18px; padding: 10px; height: 100px;
+  }
+
+  footer a {
+    text-decoration: underline; color: white;
+  } 
+
+  .footlink:hover {
+    color: #A5B3FF;
+  }
+
+  .footimg {
+    text-align: right; margin-top: -5px; cursor: pointer;
+  } 
+  .apply-btn:hover {
+    background-color: #5499D6 !important;
+  } .apply-btn:hover a { color: white !important;}
+  .card-body {
+    height: 350px;
+  }
+
+  .app-wrapper {
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    width: 100%;
+    background-color: #fff;
+    position: relative !important; 
+  }
+
+  .leftimg-wrapper {
+    position: relative; flex-basis: 30%; height: 300px; display: flex;
+    justify-content: center; align-items: center;
+  }
+  .leftimg-wrapper img {
+    width: 80% !important; height: 80% !important;
+    object-fit: contain; padding: 10px; background-color: white;
+    border-radius: 50%; 
+  }
+  .rightimg-wrapper {
+    position: relative; flex-basis: 70%; padding: 20px 60px 20px 30px;
+  }
+ .app-wrapper h2 { 
+  letter-spacing: 1px; color: #277ca5; font-weight: 600 !important; 
+  border-bottom: 2px solid #628E90; padding-bottom: 5px; margin-bottom: 15px;
+}
+ 
+</style>
+<section class="main">
+  <div class="mainimg">
+  <img src="../static/img/man_office1.png">
+</div>
+    <div class="container">
+        <div class="row introMax d-flex align-items-center justify-content-center">
+            <div class="col-lg-7 intro">
+              
+              <form method=POST action="{% url 'search-job'%}">
+                {% csrf_token %}
+                
+                <div class="search-job"><br><br><br><br><br><br><br><br>
+                  <h2 style="color:#fff;font-size: 35px;">"Don't wait for the right opportunity, Create It"</h2>
+                <input style=" width: 60%;" type="search" name="searched" placeholder="Job Title, Skill, Location or Keyword">
+                <button class="btn2" type="submit">Find Job</button>
+              </div>
+              </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+ {% comment %}----Category Section----{% endcomment %}
+ 
+
+
+
+
+
+   {% comment %}----Resume Section----{% endcomment %}
+
+
+  {% comment %}----Post a Job Section----{% endcomment %}
+
+
+    {% comment %}----Process Section----{% endcomment %}
+
+  <section class="apply" style="position: relative; padding: 5%; background: #113547;" >
+    
+      <h1 style="font-size: 50px; text-align: center; color: #F8EDE3; font-weight: 600 !important; letter-spacing: 1.5px;">HOW TO APPLY?</h1><br>
+      
+            <div class="app-wrapper">
+
+              <div class="leftimg-wrapper">
+                <img src ="{% static '/img/visitjob1.png' %}">
+              </div>
+
+              <div class="rightimg-wrapper">
+                <h2>1. Visit</h2>
+                <p>"How does it work? Visit our website to look for a job that matches your qualifications. Users can apply for any job that the companies provide. Jobs are available, and they may be found on the homepage."</p>
+              </div>
+
+            </div>
+
+        <br>
+            <div class="app-wrapper">
+
+              <div class="leftimg-wrapper">
+                <img src ="{% static '/img/searching.png' %}" style="background-color: none;">
+              </div>  
+
+              <div class="rightimg-wrapper">
+              <h2>2. Search</h2>
+              <p>"There are many jobs on this site, but you can also use the feature to search for positions that match your talents."</p>
+            </div>
+
+            
+            
+
+          </div>
+
+
+          <br>
+          <div class="app-wrapper">
+
+            <div class="leftimg-wrapper">
+
+                <img src ="{% static '/img/applying.png' %}">
+              </div>
+
+              <div class="rightimg-wrapper">
+              <h2>3. Apply</h2>
+              <p>"You can modify your profile and look for open positions in the companies."</p>
+        </div>
+
+        </div>  
+
+        <br>
+        <div class="app-wrapper">
+          
+          <div class="leftimg-wrapper">
+
+            <img src ="{% static '/img/grabbing.png' %}">
+          </div>
+
+          <div class="rightimg-wrapper">
+              <h2>4.Grab</h2>
+              <p>"Keep up to speed on job events and career possibilities."
+              </p>
+          </div>
+          
+        </div>
+
+  </section>
+
+  <script src="https://kit.fontawesome.com/xxxxxxxxxx.js" crossorigin="anonymous"></script>
+  <footer style="position: relative;">
+    <div style="text-align: left; color: white; margin-right: 30px;">
+      &copy; NosAscend PH, 2023
+    </div>
+
+    <div style="color: white; margin-right: 30px;">   
+      <a href="#" class="footlink">Terms of Use</a> |
+      <a href="#" class="footlink">Privacy Policy</a>
+    </div>
+
+    <div class="footimg">
+      <img src="{% static '/img/fbicon.png' %}" height="50px" width="50px">
+      <img src="{% static '/img/twit_icon.png' %}" height="50px" width="50px">&thinsp;&nbsp;
+      <img src="{% static '/img/gmailicon.png' %}" height="38px" width="38px">
+    </div>
+  </footer>
+
+
+
+
+
+    
+{% endblock %}

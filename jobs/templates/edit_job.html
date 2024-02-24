@@ -1,0 +1,98 @@
+{% extends 'company_navbar.html' %}
+
+{% block title %} Admission System {% endblock %}
+{% block application_form %} active {% endblock %}
+{% block job_list %} active {% endblock %}
+{% block css %}
+{% endblock %}
+{% block body %}
+<style>
+    label { color:#628E90; font-weight: 600; font-size: 20px;}
+    .form-wrapp {
+        background: linear-gradient(#D7E1EC,#FFFFFF);
+        width: 80%; text-align: left;
+    }
+    .nav-header {
+        padding: 15px 30px 12px 30px !important; background-color: #52787a; margin: 0 !important;
+        text-align: center;
+    } 
+    .nav-header h2 { font-size: 38px; letter-spacing: 1.5px; font-family: 'Poppins', sans-serif; font-weight: 600;  color: white;}
+
+</style> 
+<br><center>
+<div class="form-wrapp">
+    <div class="nav-header">
+        <h2><i class="fa-solid fa-pen-to-square spacicon"></i> EDIT JOB</h2>
+    </div>
+<form class="container mt-3" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label>Job Position</label>
+            <input type="text" class="form-control mt-1" name="job_title" id="job_title" value="{{job.title}}" required>
+        </div>
+    </div>
+    
+    <div class="row mt-3">
+        <div class="form-group col-md-6">
+            <label>Start Date ({{job.start_date}})</label>
+            <input type="date" class="form-control mt-1" name="start_date" id="start_date">
+        </div>
+        <div class="form-group col-md-6">
+            <label>End Date ({{job.end_date}})</label>
+            <input type="date" class="form-control mt-1" name="end_date" id="end_date">
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="form-group col-md-6">
+            <label>Experience (in years)</label>
+            <input type="text" class="form-control mt-1" name="experience" id="experience" value="{{job.experience}}" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label>Salary/month</label>
+            <input type="tel" class="form-control mt-1" name="salary" id="salary" value="{{job.salary}}" required>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="form-group col-md-12">
+            <label>Skills Required</label>
+            <input type="text" class="form-control mt-1" name="skills" id="skills" value="{{job.skills}}" required>
+        </div>
+        </div>
+    
+    <div class="row mt-3">
+        <div class="form-group col-md-12">
+            <label>Company Location</label>
+            <input type="text" class="form-control mt-1" name="location" id="location" value="{{job.location}}" required>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="form-group col-md-12">
+            <label>Job Description</label>
+            <textarea name="description" id="description" class="form-control mt-1" cols="30" rows="4" required>{{job.description}}</textarea>
+        </div>
+    </div>
+    <div style="text-align: right;"><br>
+        <button type="button" class="back-btn" onclick="history.back()" style="width: 200px;"><i class="fa-solid fa-x spacicon"></i>Cancel</button>
+        <input type="submit" value="Submit" class="submit-btn" style="width: 300px;">
+    </div><br>
+</form>
+</div>
+</center><br>
+{% endblock %}
+{% block js %}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {% if alert %}
+        <script>
+            Swal.fire({
+                title: "Job details updated successfully.",
+                icon: "success",
+            }).then(function() {window.location.href = "/job_list/"});
+        </script> 
+    {% endif %}
+{% endblock %}
+

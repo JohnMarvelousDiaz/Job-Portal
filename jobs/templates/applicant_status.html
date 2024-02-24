@@ -1,0 +1,50 @@
+{% extends 'admin_navbar.html' %}
+
+{% block title %} Change Applicant Status {% endblock %}
+{% block application_form %} active {% endblock %}
+{% block css %}
+{% endblock %}
+{% block body %}
+<style>
+    body { background: lightgray;}
+</style>
+<br><center>
+<div class="form-wrapp">
+    <div class="nav-header">
+        <h2><i class="fa-solid fa-pen-to-square spacicon"></i> UPDATE APPLICANT</h2>
+    </div> 
+<form method="POST"> {% csrf_token %}
+    <div class="container mt-5">
+        {% comment %} <div class="mb-3">
+            <label for="username" class="form-label"><i style="font-weight: bold;">Applicants Name</i></label>
+            <input type="text" class="form-control" id="applicants" name="applicants" value="{{applicant.user}}" readonly>
+        </div> {% endcomment %}
+
+        <div class="mb-3">
+            <label for="password" class="form-label label-dsgn">Status</label>
+            <select name="status" id="status" class="form-control">
+                <option value="Activated">Activate</option>
+                <option value="Deactivated">Deactivate</option>
+            </select>
+        </div>
+        <br>
+        <button type="button" class="back-btn btn" onclick="history.back()">Cancel</button>
+        <input type="submit" value="Submit" class="submit-btn btn">
+        <br><br>
+    </div>
+</form>
+</div>
+</center><br>
+{% endblock %}
+{% block js %}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    {% if alert %}
+        <script>
+            Swal.fire({
+               title: "Status changed successfully",
+               icon: "success",
+            }).then(function() {window.location.href = "/view_applicants/"});
+        </script>
+    {% endif %}
+{% endblock %}

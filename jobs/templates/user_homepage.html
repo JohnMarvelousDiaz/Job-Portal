@@ -1,0 +1,141 @@
+{% extends 'user_navbar.html' %}
+{% block title %} User Profile {% endblock %}
+{% block home %} active {% endblock %}
+{% block css %}
+{% endblock %}
+{% block body %}
+<style>
+    .container-wrapper {
+        display: flex; justify-content: center; align-items: center; 
+        margin-top: 40px; 
+    }
+    .left-wrapper{
+        position: relative; flex-basis: 30%; background-color: #E6DDC4; background: linear-gradient(90deg,#F6F0EA,#F1DFD1);
+        text-align: center; margin-top: 0px; color: #628E90;
+    } 
+    .right-wrapper { 
+        position: relative; flex-basis: 70%; margin-top: 0px; background: linear-gradient(#D7E1EC,#FFFFFF); padding: 7.5px 0;
+    }
+    .profile-info {
+        font-size: 20px;
+    }
+    .profile-info p {
+        margin-left: 32px; text-align: left; margin-top: -5px;
+    }
+    label { color: #628E90; font-weight: 600; font-size: 18px;}
+</style>
+<section>
+<div class="container">
+    <div class="row container-wrapper">
+        <div class="left-wrapper"><br><br>
+            <img src="{{applicant.image.url}}" alt="" width="300px" height="300px">
+            <div class="profile-info"><br>
+                <p><i class="fa-solid fa-user spacicon"></i> &thinsp;{{applicant.user.first_name}} {{applicant.user.last_name}}</p> 
+                <p><i class="fa-solid fa-envelope spacicon"></i> {{applicant.user.username}}</p>
+                <p><i class="fa-solid fa-phone spacicon"></i> {{applicant.phone}}</p>
+                <p><i class="fa-solid fa-venus-mars spacicon"></i>{{applicant.gender}}</p><br><br>
+        </div>
+        </div>  
+
+        <div class="right-wrapper">
+
+            <form class="container mt-4" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="row">
+                    
+                    <div class="form-group col-md-12">
+                        <label>Email Address</label>
+                        <input type="email" class="form-control mt-2" name="username" id="username"
+                            value="{{applicant.user.username}}" readonly>
+                    </div><br><br><br><br>
+
+                    <div class="form-group col-md-6">
+                        <label>First Name</label>
+                        <input type="text" class="form-control mt-2" name="first_name" id="first_name"
+                            value="{{applicant.user.first_name}}" >
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Last Name</label>
+                        <input type="text" class="form-control mt-2" name="last_name" id="last_name"
+                        value="{{applicant.user.last_name}}" >
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="form-group col-md-12">
+                        <label>Contact Number</label>
+                        <input type="tel" class="form-control mt-2" name="phone" id="phone" value="{{applicant.phone}}" >
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="form-group col-md-6">
+                        <label>Password</label>
+                        <input type="password" class="form-control mt-2" name="password" id="password" value="{{applicant.user.password}}" >
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Confirm Password</label>
+                        <input type="password" class="form-control mt-2" name="cpass" id="cpass" value="{{applicant.user.cpass}}" >
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="form-group col-md-6">
+                        <label>Gender</label>
+                        {% if applicant.gender == "Male" %}
+                        <div class="mt-2" style="border: 1px solid lightgrey; padding: 5px; border-radius: 6px;">
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="custom-control-input" name="gender" value="Male" checked>
+                                <label for="male" class="custom-control-label">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="custom-control-input" name="gender"
+                                    value="Female">
+                                <label for="female" class="custom-control-label">Female</label>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div style="border: 1px solid lightgrey; padding: 5px; border-radius: 6px;">
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="custom-control-input" name="gender" value="Male">
+                                <label for="male" class="custom-control-label">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="custom-control-input" name="gender"
+                                    value="Female" checked>
+                                <label for="female" class="custom-control-label">Female</label>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Profile Picture</label>
+                        <input type="file" class="form-control mt-2" name="image" id="image">
+                    </div>
+                </div>
+                <div style="text-align: right;"><br>
+                    <input type="submit" value="Submit" class="submit-btn" accept="image/*" style="width: 300px;">
+                </div>
+            </form>
+<br>
+        </div>
+        
+    </div>
+</div>
+</section>
+{% endblock %}
+{% block js %}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    {% if alert %}
+        <script>
+            Swal.fire({
+               title: "Profile Updated Successfully",
+               icon: "success",
+            }).then(function() {window.location.href = "/user_homepage/"});
+            
+        </script>
+    {% endif %}
+
+{% endblock %}

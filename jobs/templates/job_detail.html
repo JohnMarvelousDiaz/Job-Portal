@@ -1,0 +1,70 @@
+{% extends 'user_navbar.html' %}
+
+{% block title %} Job Details {% endblock %}
+{% block job_list %} active {% endblock %}
+{% block css %}
+{% endblock %}
+{% block body %}
+
+<style>
+    .container-wrapper {
+        display: flex; justify-content: center; align-items: center; 
+        margin-top: 40px; width: 90vw; height: 572px;
+    }
+    .left-wrapper{
+        position: relative; flex-basis: 30%; background-color: #E6DDC4;  background: linear-gradient(90deg,#F6F0EA,#F1DFD1); 
+        text-align: center; margin-top: 0px; color: #628E90;
+    } .left-wrapper p { font-size: 18px; } .left-wrapper h2 { font-weight: 600;}
+    .right-wrapper { 
+        position: relative; flex-basis: 70%; margin-top: 0px; height: 100% !important;
+        padding: 0px 50px; text-align: left; background: linear-gradient(#D7E1EC,#FFFFFF);
+    } .right-wrapper h3, .right-wrapper h4 { color: #628E90; font-weight: 600;}
+    .right-wrapper p {
+        font-size: 18px; margin-bottom: 25px; 
+    } 
+    .profile-info {
+        font-size: 20px;
+    }
+    .profile-info p {
+        margin-left: 0px; text-align: left; margin-top: -5px;
+    }
+    label { color: #628E90; font-weight: 600; font-size: 18px;}
+</style>
+<center>
+<div class="row container-wrapper">
+    <div class="left-wrapper"><br>
+        <img src="{{job.image.url}}" alt="" width="350px" height="250px"><br><br>
+        <h2 style="margin-top: 10px;">{{job.title}}</h2>
+        <br>
+        <div style="text-align: left; margin-left: 10px;">
+        <p><i class="fa fa-map-marker spacicon"></i><b> LOCATION:</b> {{job.location}}</p>
+        <p><i class="fa fa-calendar spacicon"></i><b> JOB DATE:</b> {{job.creation_date}}</p>  
+        <p><i class="fa-solid fa-hand-holding-dollar spacicon"></i><b>SALARY:</b> &#8369;{{job.salary}}/month</p>
+        </div>  
+        <div class="mt-3">
+            <a href="/job_apply/{{job.id}}/" class="btn btn-danger" style="font-size: 18px;">Apply For The Job</a>
+        </div><br>
+    </div>
+
+    <div class="right-wrapper">
+        <br>
+        <h3>Overview:</h3>
+        <p>{{job.description}}</p>
+    
+        <h4>Required Experience:</h4>
+        <p>{{job.experience}} years</p>
+    
+        <h4>Skills Required:</h4>
+        <p>{{job.skills}}</p>
+    
+        <h4>Start Date for Application:</h4>
+        <p>{{job.start_date}}</p>
+    
+        <h4>End Date for Application:</h4>
+        <p>{{job.end_date}}</p>
+    </div>
+        
+
+</div>
+</center>   
+{% endblock %}

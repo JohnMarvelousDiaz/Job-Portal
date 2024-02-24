@@ -1,0 +1,96 @@
+{% extends 'basic.html' %}
+
+{% block title %} User Signup Page {% endblock %}
+{% block user_login %} active {% endblock %}
+{% block css %}
+{% endblock %}
+{% block body %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<style>
+    .form-user input {
+        margin-bottom: 10px;
+    }
+ 
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+</style>
+<br>
+<div class="container-wrapper" style="height: 100vh;">
+    <div class="left-wrapper">
+        <img src="../static/img/woman_office.jpg" alt="alt">
+    </div>
+
+    <div class="right-wrapper">
+        <form method="POST" enctype="multipart/form-data" style="width: 70%;">
+            {% csrf_token %}
+
+            <h1 class="header-log">REGISTER USER</h1>
+            <div class="form-user">
+                <label>First Name</label>
+                <input type="text" class="form-control" name="first_name" id="first_name" placeholder="Enter First Name"
+                    required>
+
+                <label>Last Name</label>
+                <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Enter Last Name"
+                    required>
+
+                <label>Password</label>
+                <input type="password" class="form-control" name="password1" id="password1" placeholder="Enter Password"
+                    required>
+
+                <label>Confirm Password</label>
+                <input type="password" class="form-control" name="password2" id="password2"
+                    placeholder="Confirm Password" required>
+
+                <label>Email Address</label>
+                <input type="email" class="form-control" name="email" id="email" placeholder="Enter Email Address"
+                    required>
+
+                <label>Contact Number</label>
+                <input type="number" class="form-control" name="phone" id="phone" minlength="11"
+                    placeholder="Enter Contact Number" required>
+
+                <label>Gender</label>
+                <div style="border: 1px solid lightgrey; padding: 5px; border-radius: 6px;">
+                    <div class="form-check form-check-inline">
+                        <input type="radio" class="custom-control-input" name="gender" id="male" value="Male" required>
+                        <label for="male" class="custom-control-label">Male</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" class="custom-control-input" name="gender" id="female" value="Female">
+                        <label for="female" class="custom-control-label">Female</label>
+                    </div>
+                </div>
+
+                <label>Profile Picture</label>
+                <input type="file" class="form-control" name="image" id="image" placeholder="Enter Last Name" required>
+            </div>
+            <br>
+            <input type="submit" value="Sign Up" class="submit-btn">
+        </form>
+    </div>
+
+</div><br>
+{% if signup %}
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Account Created Successfully',
+    }).then(function () { window.location.href = "/user_login/" });
+</script>
+{% elif passnotmatch %}
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Password Not Matched',
+    }).then(function () { window.location.href = "/signup/" });
+</script>
+{% endif %}
+
+
+
+
+{% endblock %}

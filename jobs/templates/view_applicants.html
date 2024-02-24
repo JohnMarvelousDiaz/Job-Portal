@@ -1,0 +1,49 @@
+{% extends 'admin_navbar.html' %}
+
+{% block title %} All Applicants {% endblock %}
+{% block view_applicants %} active {% endblock %}
+{% block css %}
+{% endblock %}
+{% block body %}
+<center>
+<div class="containers mt-4">
+<table class="table table-hover" id="example">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Full Name</th>
+            <th>Email Address</th>
+            <th>Contact</th>
+            <th>Gender</th>
+            <th>Image</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead> 
+    <tbody>
+        {% for applicant in applicants %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{applicant.user.get_full_name}}</td>
+            <td>{{applicant.user.username}}</td>
+            <td>{{applicant.phone}}</td>
+            <td>{{applicant.gender}}</td>
+            <td><img src="{{applicant.image.url}}" class="rounded-circle" width="90px" height="70px"></td>
+            <td>{{applicant.status}}</td>
+            <td><a href="/applicant_status/{{applicant.user.id}}/" class="btn edit-btn" onclick="/applicant_status/"><i class="fa-solid fa-pen-to-square spacicon"></i>Edit</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div><br>
+</center>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {% if alert %}
+        <script>
+            Swal.fire({
+               title: "Successfully deleted",
+               icon: "success",
+            }).then(function() {window.location.href = "/view_applicants/"});
+        </script>
+    {% endif %} 
+{% endblock %}

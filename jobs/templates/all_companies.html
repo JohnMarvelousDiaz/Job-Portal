@@ -1,0 +1,69 @@
+{% extends 'admin_navbar.html' %}
+
+{% block title %} All Companies {% endblock %}
+{% block application_form %} active {% endblock %}
+{% block companies %} active {% endblock %}
+{% block css %}
+{% endblock %}
+{% block body %}
+<center>
+<div class="containers mt-4">
+<table class="table table-hover" id="example">
+    <thead>
+        <tr> 
+            <th>ID</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Contact</th>
+            <th>Gender</th>
+            <th>Company </th>
+            <th>Image</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for company in companies %}
+        <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{company.user.get_full_name}}</td>
+            <td>{{company.user.email}}</td>
+            <td>{{company.phone}}</td>
+            <td>{{company.gender}}</td>
+            <td>{{company.company_name}}</td>
+            <td><img src="{{company.image.url}}" class="rounded-circle" width="90px" height="70px"></td>
+            <td>{{company.status}}</td>
+            <td>
+              <a href="/change_status/{{company.id}}/" class="btn btn-secondary edit-btn">Change Status</a>
+              <a href="/delete_company/{{company.user.id}}/" class="btn btn-danger delete-btn delcomp">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</center>
+<script>
+    const deleteButtons = document.querySelectorAll('.delcomp');
+    deleteButtons.forEach((button) => {
+      button.addEventListener('click', (event) => {
+        event.preventDefault();
+        const url = button.getAttribute('href');
+        Swal.fire({
+          title: 'Are you sure you want to delete this company?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.value) {
+            window.location.href = url;
+          }
+        });
+      });
+    });
+  </script>
+  
+</div>
+{% endblock %}

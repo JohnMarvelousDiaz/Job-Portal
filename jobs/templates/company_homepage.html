@@ -1,0 +1,162 @@
+{% extends 'company_navbar.html' %}
+
+{% block title %} Company Profile {% endblock %}
+{% block home %} active {% endblock %}
+{% block css %}
+{% endblock %}
+{% block body %}
+<style>
+    .container-wrapper {
+        display: flex; justify-content: center; align-items: center; 
+        margin-top: 40px;
+    }
+    .left-wrapper{
+        position: relative; flex-basis: 30%; background-color: #E6DDC4; background: linear-gradient(90deg,#F6F0EA,#F1DFD1);
+        text-align: center; margin-top: 0px; color: #628E90;
+    }
+    .right-wrapper { 
+        position: relative; flex-basis: 70%; margin-top: 0px; color: #628E90; background: linear-gradient(#D7E1EC,#FFFFFF);
+        padding: 3.5px 0;
+    }
+    .profile-info {
+        font-size: 20px;
+    } 
+    .profile-info p {
+        margin-left: 32px; text-align: left; margin-top: -5px;
+    }
+    label { color: #628E90; font-weight: 600; font-size: 18px;}
+</style>
+<div class="container">
+    <div class="row container-wrapper">
+
+        <div class="left-wrapper"><br><br>
+            <img src="{{company.image.url}}" alt="" width="300px" height="300px"><br>
+            <div class="profile-info"><br>
+                <p><i class="fa-solid fa-user spacicon"></i> &thinsp;{{company.user.first_name}} {{company.user.last_name}}</p> 
+                <p><i class="fa-solid fa-briefcase spacicon"></i> {{company.company_name}}</p>
+                <p><i class="fa-solid fa-envelope spacicon"></i> {{company.user.email}}</p>
+                <p><i class="fa-solid fa-phone spacicon"></i> {{company.phone}}</p>
+                <p><i class="fa-solid fa-venus-mars spacicon"></i>{{company.gender}}</p>
+                <br><br>
+            </div>
+        </div>
+
+        <div class="right-wrapper">
+            <form class="container mt-4" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="row mt-4">
+                    <div class="form-group col-md-12">
+                        <label>Company Name</label>
+                        <input type="text" class="form-control" name="company_name" id="company_name"
+                            value="{{company.company_name}}" readonly>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="form-group col-md-12">
+                        <label>Username</label>
+                        <input type="text" class="form-control" name="username" id="username"
+                            value="{{company.user.username}}" readonly>
+                    </div>
+                </div><br>
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label>First Name</label>
+                        <input type="text" class="form-control" name="first_name" id="first_name"
+                            value="{{company.user.first_name}}" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Last Name</label>
+                        <input type="text" class="form-control" name="last_name" id="last_name"
+                        value="{{company.user.last_name}}" required>
+                    </div>
+                </div>
+
+
+                <div class="row mt-4">
+                    <div class="form-group col-md-6">
+                        <label>Email Address</label>
+                        <input type="email" class="form-control" name="email" id="email" value="{{company.user.email}}" >
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Contact Number</label>
+                        <input type="tel" class="form-control" name="phone" id="phone" value="{{company.phone}}" >
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="form-group col-md-6">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" name="password" id="password" value="{{company.user.password}}" >
+                    </div>
+
+                    <div class="form-group col-md-6"
+                        <label for="cpass" style="font-weight: 600; font-size: 18px;">Confirm Password</label>
+                        <input type="password" class="form-control" name="cpass" id="cpass" value="{{company.cpass}}" >
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="form-group col-md-6">
+                        <label>Gender</label>
+                        {% if company.gender == "Male" %}
+                        <div style="border: 1px solid lightgrey; padding: 5px; border-radius: 6px;">
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="custom-control-input" name="gender" value="Male" checked>
+                                <label for="male" class="custom-control-label">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="custom-control-input" name="gender"
+                                    value="Female">
+                                <label for="female" class="custom-control-label">Female</label>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div style="border: 1px solid lightgrey; padding: 5px; border-radius: 6px;">
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="custom-control-input" name="gender" value="Male">
+                                <label for="male" class="custom-control-label">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input type="radio" class="custom-control-input" name="gender"
+                                    value="Female" checked>
+                                <label for="female" class="custom-control-label">Female</label>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Company Logo</label>
+                        <input type="file" class="form-control" name="image" id="image">
+                    </div>
+                </div>
+                <div style="text-align: right;"><br>
+                    <input type="submit" value="Submit" class="submit-btn" style="width: 250px;">
+                </div>
+            </form>
+<br>
+        </div>
+        
+    </div><br><br>
+</div>
+{% endblock %}
+{% block js %}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    {% if alert %}
+        <script>
+    Swal.fire({
+		  icon: 'success',
+		  title:'Profile Updated Successfully',
+		  text: '',
+		  backdrop: 'rgba(61,60,60,1)',
+		  confirmButtonColor: '#38a8d4'
+	  }).then(function() {
+		window.location.href = "/company_homepage/";
+	});
+        </script>
+    {% endif %}
+{% endblock %}
+

@@ -1,0 +1,49 @@
+{% extends 'basic.html' %}
+
+{% block title %} User Login Page {% endblock %}
+{% block user_login %} active {% endblock %}
+{% block css %}
+{% endblock %}
+{% block body %}
+<br>
+<div class="container-wrapper" style="border-radius: 10%;">
+<div class="left-wrapper">
+<img src="../static/img/user (1).png" style="object-fit: cover;">
+</div>
+<div style=" background: #113547;" class="right-wrapper">
+<form method="POST" style="width: 70%;"> {% csrf_token %}
+    <h1 class="header-log">USER LOGIN</h1>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="text" class="form-control" id="email" name="email" placeholder="Enter Email Address">
+    </div> 
+    <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
+    </div>
+    <input type="submit" value="Sign In" class="submit-btn">
+    <br>
+    <br>
+        <div class="item-box">
+            <h6>Haven't register yet, then click here        <a href="/signup/" type="submit" class="btn" style="background-color: #0d6efd; color: white;">Signup</a>
+            </h6><br>
+            <br>
+            
+        </div>
+</form>
+</div>
+
+</div><br>
+{% endblock %}
+{% block js %}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {% if thank %}
+        <script>
+            Swal.fire({
+                title: "Invalid Credentials. Please try again.",
+                icon: "error",
+        }).then(function() {window.location.href = "/user_login/"});
+        </script> 
+    {% endif %}
+
+{% endblock %}

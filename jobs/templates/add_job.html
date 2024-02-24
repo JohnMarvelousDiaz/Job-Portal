@@ -1,0 +1,100 @@
+{% extends 'company_navbar.html' %}
+
+{% block title %} Add Jobs {% endblock %}
+{% block add_job %} active {% endblock %}
+{% block css %}
+{% endblock %}
+{% block body %}
+
+<style>
+    label { color:#628E90; font-weight: 600; font-size: 20px;}
+    .form-wrapp {
+        background: linear-gradient(#D7E1EC,#FFFFFF);
+        width: 80%; text-align: left;
+    } 
+    .nav-header {
+        padding: 15px 30px 12px 30px !important; background-color: #52787a; margin: 0 !important;
+        text-align: center;
+    } 
+    .nav-header h2 { font-size: 38px; letter-spacing: 1.5px; font-family: 'Poppins', sans-serif; font-weight: 600;  color: white;}
+</style>
+<br><center>
+<div class="form-wrapp">
+    <div class="nav-header">
+        <h2><i class="fa-solid fa-user-plus spacicon"></i> JOB HIRING FORM:</h2>
+    </div>
+
+<form class="container mt-3" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+
+    <div class="row">
+        <div class="form-group col-md-12">
+            <label>Job Position</label>
+            <input type="text" class="form-control" name="job_title" id="job_title" placeholder="Job Position" required>
+        </div>
+    </div>
+    
+    <div class="row mt-3">
+        <div class="form-group col-md-6">
+            <label>Start Date</label>
+            <input type="date" class="form-control" name="start_date" id="start_date" placeholder="Start Date" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label>End Date</label>
+            <input type="date" class="form-control" name="end_date" id="end_date" placeholder="End Date" required>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="form-group col-md-6">
+            <label>Experience (in years)</label>
+            <input type="text" class="form-control" name="experience" id="experience" placeholder="Experience required (in years)" required>
+        </div>
+        <div class="form-group col-md-6">
+            <label>Salary/month</label>
+            <input type="tel" class="form-control" name="salary" id="salary" placeholder="Enter Salary/month" required>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="form-group col-md-12">
+            <label>Skills Required</label>
+            <input type="text" class="form-control" name="skills" id="skills" placeholder="Enter the required skills for the job" required>
+        </div>
+        </div>
+    
+    <div class="row mt-3">
+        <div class="form-group col-md-12">
+            <label>Company Location</label>
+            <input type="text" class="form-control" name="location" id="location" placeholder="Enter exact location of the Company" required>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="form-group col-md-12">
+            <label>Job Description</label>
+           <textarea name="description" id="description" class="form-control" cols="30" rows="4" placeholder="Description of the exact job" required></textarea>
+        </div>
+    </div>
+    <div style="text-align: right;"><br>
+<input type="submit" value="Submit" class="submit-btn" style="width: 300px;"><br><br>
+</div>
+</form>
+</div>
+</center><br>
+{% endblock %}
+{% block js %}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    {% if alert %}
+        <script>
+            Swal.fire({
+               title: "Job added successfully",
+               icon: "success",
+            }).then(function() {window.location.href = "/job_list/"});
+            
+        </script> 
+    {% endif %}
+{% endblock %}
+

@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://kit.fontawesome.com/dc58e42ed8.js" crossorigin="anonymous"></script>
+ 
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+ 
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.24/sweetalert2.all.js"></script>
+
+  <title>{% block title %}{% endblock %}</title>
+  <style>
+    * { 
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .navbar {
+      background-color: white; color: black !important; 
+      padding: 0 !important; height: 100px; border-bottom: 5px solid #7895B2;
+    }
+
+    .form-wrapp {
+        background: linear-gradient(#D7E1EC,#FFFFFF);
+        width: 80%; text-align: left;
+    }
+    .nav-header {
+        padding: 15px 30px 12px 30px !important; background-color: #52787a; margin: 0 !important;
+        text-align: center;
+    } 
+    
+    label { color:#628E90 !important; font-weight: 600; font-size: 20px;}
+
+    .nav-header h2 { font-size: 38px; letter-spacing: 1.5px; font-family: 'Poppins', sans-serif; font-weight: 600;  color: white;}
+
+    table tbody tr:hover { background-color: #94E2F2 !important;}
+    
+    ul { 
+      list-style: none; width: 100% !important; 
+      text-align: right; 
+    }
+
+    ul li { display: inline-block; margin-right: 20px;}
+
+    ul li a {
+      color: black !important; margin-top: 10px; 
+      font-size: 22px; text-align: center; cursor: pointer;
+    } 
+    #search-input {
+   width: 300px !important;
+   padding: 10px;
+   border: 1px solid #ccc !important;
+   border-radius: 4px;
+   font-size: 48px !important;
+}
+
+
+    table thead tr { color:#628E90; }
+    table th { font-size: 20px; text-align: center;}
+    table td { text-align: center;}
+    
+    .navmenu a:hover:not(.active) { border-bottom: 2px solid #083dad; color: #083dad !important; margin-top: 12px !important;}
+
+    .active {
+      background-color: #7895B2; color: white !important;
+    }
+    
+    .head1 {
+      color: #FBAD30;
+      font-size: 25px;
+      font-weight: bold;
+      height: 50px;
+    }
+
+    ul li a{ color: black !important;}
+
+    .head2 {
+      color: #EF4926;
+      font-size: 25px;
+      font-weight: bold;
+    }
+    .navbar-nav {
+      margin-left: 20px;
+    }
+
+    .admin-prof {
+      font-weight: bold; text-decoration: none; color: #083dad !important; padding: 0 15px;
+      background: linear-gradient(#B3F6D8, #52A7C1); line-height: 95px; margin-right: 0px;
+    }
+
+    .admin-prof a {
+      color: #083dad !important; font-weight: bold;
+    }
+    .spacicon {
+      margin-right: 10px;
+    }
+    .logout-btn {
+      color: white; margin-right: 10px; cursor: pointer;
+    } .logout-btn:hover { background-color: #4682B4; color: white;}
+
+    .swal-wide {
+      width: 550px !important;
+    }
+    .edit-btn { 
+      padding: 8px 12px; background-color: #083dad; color: white; transition: 0.3s ease-out; text-decoration: none;
+    }.edit-btn:hover { box-shadow: inset 0px 10px 10px rgba(0, 0, 0, 0.5); background-color: #083dad; color: white;}
+    
+    .portal-header {
+      margin-top: -30px; margin-left: 0px !important; padding: 0 !important;
+      border-bottom: 2px solid #083dad; color: #083dad; margin-bottom: 20px;
+    }
+    .portal-header2 {
+      margin-left: 10px !important; padding: 20px; width: 94%;
+      border-bottom: 2px solid #083dad; color: #083dad;
+    }
+    .submit-btn { 
+      padding: 12px 20px !important; background-color: #00BECC !important; color: white; transition: 0.3s ease-out;
+      display: inline-block; outline: none; border: none; font-size: 18px;
+    }.submit-btn:hover { box-shadow: inset 0px 10px 10px rgba(0, 0, 0, 0.5); background-color: #4682B4  !important; color: white;}
+    .back-btn {
+      padding: 11px 17px; background-color: none !important; color: black; transition: 0.3s ease-out;
+      border: 2px solid gray; outline: none; display: inline-block; margin-right: 20px; font-size: 18px;
+    }.back-btn:hover { background-color: gray; color: white;}
+    .titlepage {
+    color: #7895B2 !important; font-family: 'Poppins', sans-serif;
+    margin-left: 60px !important; transform: scale(1.1,1); font-size: 48px;
+    }
+    .dropdown-menu {
+      width: 190px !important; 
+    } .dropdown-menu li { display: block !important; }
+    .dropdown-menu li a:hover { background-color: none !important; background: none !important;}
+    .btn { width: 150px; }
+    .containers { width: 95% !important;}
+  </style>
+  {% block css %}
+  {% endblock %}
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <a class="job navbar-brand text-primary mx-3 titlepage" href="#">NosAscend PH</a>    
+
+        <ul>
+
+              <li class="nav-item dropdown navmenu">
+                <a class="nav-link dropdown-toggle {% block companies %} {% endblock %}" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Company
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDarkDropdownMenuLink">
+                  <li><a class="dropdown-item" href="/accepted_companies/">Accepted</a></li>
+                  <li><a class="dropdown-item" href="/pending_companies/">Pending</a></li>
+                  <li><a class="dropdown-item" href="/rejected_companies/">Rejected</a></li>
+                  <li><a class="dropdown-item" href="/all_companies/">All Companies</a></li>
+                </ul>
+              </li>
+
+          <li class="nav-item navmenu">
+            <a class="nav-link {% block view_applicants %} {% endblock %} active-link" href="/view_applicants/" style="margin-left: 10px;">View Applicants</a>
+          </li>
+          <li class="nav-item navmenu">
+            <a class="nav-link" id="logout-btn"><i class="fa-solid fa-right-from-bracket spacicon"></i>Logout</a>
+          </li>
+          <li class="nav-item admin-prof">
+            <a class="nav-link" style="cursor: default;" href="#"><i class="fa-solid fa-user-tie spacicon"></i>Admin{{request.user.get_full_name}}</a>
+          </li>
+        </ul>
+      
+      
+  </nav>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
+
+  {% block body %}
+  {% endblock %}
+</body>
+{% block js %}
+<script>
+  $(document).ready(function () {
+    $('#example').DataTable({
+      dom: 'Bfrtip',
+      buttons: [
+        'copyHtml5',
+        'excelHtml5',
+        'csvHtml5',
+        'pdfHtml5'
+      ]
+    });
+  });
+
+document.getElementById("logout-btn").onclick = function(){
+  Swal.fire({
+  title: 'Are you sure you want to log out?',
+  text: "",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#d33',
+  cancelButtonColor: '#3085d6',
+  customClass: 'swal-wide',
+  confirmButtonText: 'Log out'
+}).then((result) => {
+  if (result.isConfirmed) {
+    window.location.href = "/logout/";
+  }
+})
+}
+
+$(document).ready(function () {             
+  $('.dataTables_filter input[type="search"]').css(
+     {
+      'width':'400px','display':'inline-block','outline':'none', 'margin-bottom':'25px', 'margin-left':'15px',
+      'text-indent':'10px'
+    }
+  );
+});
+
+</script>
+{% endblock %}
+
+</html> 

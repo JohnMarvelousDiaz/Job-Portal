@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Overpass:wght@600&family=Poppins:wght@300&display=swap');
+* {
+    font-family: 'Poppins', sans-serif !important; 
+    font-weight: 400 !important;
+}
+:root {
+    --login-width:450px;
+}
+@media (max-width:768px) {
+    :root {
+        --login-width:320px;
+    }
+}
+
+body {
+    background: #000
+}
+
+.collapse .nav-item a {
+    color: #fff;
+}
+.search-job h1{
+    font-size: 20px;
+}
+
+/* GAWA GAWA LANG */
+.container-wrapper {
+    display: flex; width: 80%; top: 10%; left: 10%;
+    position: relative; height: 85vh; 
+     /* Created with https://www.css-gradient.com */
+    background: #3213C5;
+    background: -webkit-linear-gradient(top left, #3213C5, #679EFC);
+    background: -moz-linear-gradient(top left, #3213C5, #679EFC);
+    background: linear-gradient(to bottom right, #3213C5, #679EFC);
+    border-radius: 10%; 
+}
+
+.left-wrapper {
+    position: relative; width: 50%; height: 100%;
+}
+
+.right-wrapper {
+    display: flex; width: 50%; height: 100%; 
+    justify-content: center; align-items: center; color: white;
+}
+
+.left-wrapper img {
+    height: 100%; width: 100%; object-fit: cover;
+}
+
+.header-log {
+    letter-spacing: 1px; border-bottom: 1px solid white;
+    margin-bottom: 20px; text-align: center;
+}
+
+.submit-btn {
+    width: 100%; color: white; padding: 12px; 
+    outline: none; cursor: pointer; transition: 0.3s ease-out; border: none;
+}.submit-btn:hover { box-shadow: inset 0px 10px 10px rgba(0, 0,0, 0.5);}
+
+
+
+
+
+/* GAWA NILA */
+
+.user-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 95vh;
+    background-image: url("./img/fff.jpg");
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+}
+
+.user-login .container {
+    height: 100%;
+    
+}
+.user-login .item-box {
+    height: 400px;
+    width: var(--login-width);
+    padding: 20px;
+    color: #fff;
+    background: rgba(0, 132, 255, 0.534);
+    border-radius: 10px;
+} 
+
+.user-login label, .user-login input::placeholder,.user-login input {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.sign-up-class {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 95vh;
+    max-height: 100%;
+    background-image: url("./img/fff.jpg");
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+}
+
+.sign-up-class::before {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 80%;
+    height: 80%;
+    background: rgba(0, 132, 255, 0.534);
+    border-radius: 25px;
+
+}
+
+.sign-up-class input, .sign-up-class label, .sign-up-class input::placeholder {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #fff;
+}

@@ -1,0 +1,108 @@
+{% extends 'basic.html'%}
+{% include 'job_list.html'%}
+
+{% block title %} Job Portal {% endblock %}
+{% block home %} active {% endblock %}
+
+{% block css %}
+{% endblock %}
+{% block body %}
+{% load static %}   
+ {% comment %}----Main Section----{% endcomment %}
+ 
+ <style> 
+    .container {
+        margin-left: 25px;
+    }
+    .table-box {
+        width: 25%; background-color: #031C67; padding: 10px 0;
+        font-size: 20px; color: white; margin-left: 25px; border-radius: 8%;
+    }
+    td { 
+        text-align: center !important;
+    }
+    .table-title {
+         border-bottom: 2px solid white; width: 90%; padding: 8px 0px 5px 0px;
+         margin-bottom: 10px; font-size: 22px;
+    }
+    .table-content {
+        display: flex; justify-content: center; align-items: center;
+        padding: 10px 20px;
+    } 
+    .tableleft-content {
+        position: relative; flex-basis: 40%; text-align: left; 
+    }
+
+    .tableright-content {
+        position: relative; flex-basis: 60%; text-align: left; text-indent: 20px;
+    }
+
+    .apply-btn {
+        width: 100%; background-color: white; color: #031C67;
+        padding: 10px; display: block !important; text-decoration: none;
+    } .apply-btn:hover { color: white; background-color:  #5499D6;}
+
+    span a {
+        cursor: pointer !important; 
+        font-size: 38px; color: blue !important; outline: none; border: none;
+        width: 150px; border-bottom: 2px solid blue; padding-bottom: 0px; 
+    }
+    span a:hover {
+        color: #288ce2 !important; border-bottom: 2px solid #288ce2;
+    }
+    .table-wrap { display: inline;}
+
+    .back-btn { border: none; outline:none; width: 120px; padding: 12px; font-size: 18px;}
+    .back-btn:hover { background-color: #288ce2; color: white;}
+ </style>
+        {% if searched %}
+        <br>
+        <div style="display: block;">
+            <h1 style="margin-left: 25px; display: inline;">Search results for "{{ searched }}"</h1>
+            <span style="margin-left: 20px;"><button class="back-btn" type="button" onclick="history.back()">Back</button></span>
+        </div>
+        <br>
+
+            {% for job in jobs %}
+            <div class="table-wrap">
+        <div class="table-box">
+            <tr>
+                {% comment %} <td>{{forloop.counter}}</td> {% endcomment %}
+            <center>
+                <div class="table-title">
+                    <td>{{job.title}}</td>
+                </div>
+
+            <div class="table-content">
+                <div class="tableleft-content">
+                    <p>Company:</p>
+                    <p>Salary:</p>
+                    <p>Location:</p>
+                    <p>Hiring Date:</p>
+                </div>
+
+            <div class="tableright-content">
+                <p>{{job.company.company_name}}</p>
+                <p>&#8369;{{job.salary|floatformat:2}}</p>
+                <p>{{job.location}}</p>
+                <p>{{job.creation_date}}</p>
+            </div>
+
+            </div>
+            <div style="padding: 20px; margin-top: -10px;">
+                <td><a href="/user_login/" class="apply-btn">Apply</a></td>
+            </div>
+                {% comment %} <td><a class="btn btn-success">Apply</a></td> {% endcomment %}
+            </center>
+            </tr>
+        </div>
+    </div><br>
+            {% endfor %}
+
+        {% else %}
+        <center><h1 class="d-block">Please type something in the search bar</h1></center>
+        <center><span style="margin-left: 20px;"><button class="back-btn" type="button" onclick="history.back()">Back</button></span></center>
+        {% endif %}
+
+ {% endblock %}
+

@@ -1,0 +1,51 @@
+{% extends 'basic.html' %}
+
+{% block title %} Admin Login {% endblock %}
+{% block admin_login %} active .active {% endblock %}
+{% block css %}
+{% endblock %}
+{% block body %}
+<br>
+<div class="container-wrapper">
+    <div class="left-wrapper">
+        <img src="../static/img/admins.png">
+    </div>
+ 
+    <div style=" background: #113547;" class="right-wrapper">
+<form method="POST" style="width: 70%;"> 
+    {% csrf_token %}
+
+    <h1 class="header-log">ADMIN LOGIN</h1>
+        <div class="item-box">
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Enter Username">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
+            </div>
+            <br>
+            <input type="submit" value="Sign In" class="submit-btn">
+        </div>
+</form>
+</div>
+
+</div><br>
+{% endblock %}
+{% block js %}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    {% if alert %}
+        {{
+            <script>
+                Swal.fire({
+                    title: "Invalid Credentials. Please try again.",
+                    icon: "error",
+            }).then(function() {window.location.href = "/admin_login/"});
+            </script>
+        }}
+    {% endif %}
+    
+
+{% endblock %}

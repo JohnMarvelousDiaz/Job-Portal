@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Comforter&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/dc58e42ed8.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+  <title>{% block title %}{% endblock %}</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <link rel="stylesheet" href="{% static 'style2.css' %}">
+  <!-- <link rel="stylesheet" href="../static/style.css"> -->
+
+</head> 
+<body>
+  <nav style="background: #000;" class="navbar navbar-expand-lg navbar-light sticky-top bg-lights sticky-top">
+    <div class="container">
+      <img src="../static/img/logo.png" style="width: 70px; height: 70px;">
+
+    <a style="color:#fff;font-weight: bolder;" class="job navbar-brand  mx-3" href="#"><b>NosAscend PH</b></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      {% comment %} <a class="navbar-brand" href="/"><span class="head1">Tech</span><span class="head2">Vidvan</span></a>
+      <a class="navbar-brand" href="#"><span class="head1">Job</span><span class="head2">Portal</span></a> {% endcomment %}
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav m-auto mb-2 mb-lg-0">
+          {% if not request.user.is_authenticated %}
+          <li class="nav-item">
+            <a style="color:#fff" class="nav-link {% comment %} text-dark mx-1 {% endcomment %} {% block home %} {% endblock %}" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item" >
+            <a style="color:#fff" class="nav-link {% comment %} text-dark mx-1 {% endcomment %} {% block user_login %} {% endblock %}" href="/user_login/">User Login</a>
+          </li>
+          <li class="nav-item">
+            <a style="color:#fff" class="nav-link {% comment %} text-dark mx-1 {% endcomment %}{% block admin_login %} {% endblock %}" href="/admin_login/">Admin Login</a>
+          </li>
+          <li class="nav-item">
+            <a style="color:#fff" class="nav-link {% comment %} text-dark mx-1 {% endcomment %} {% block company_login %} {% endblock %}" href="/company_login/">Company Login</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link active" href="/logout/">Logout</a>
+          </li>
+        </ul> 
+        
+        {% endif %}
+      </div>
+    </div>
+  </nav> 
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
+  {% block body %}
+  {% endblock %}
+</body>
+{% block js %}
+{% endblock %}
+
+</html>

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.24/sweetalert2.all.js"></script>
+  <script src="https://kit.fontawesome.com/dc58e42ed8.js" crossorigin="anonymous"></script>
+  
+
+  <title>{% block title %}{% endblock %}</title>
+  <style>
+    * { 
+      font-family: 'Poppins', sans-serif;
+    }
+    .navbar { 
+      background-color: white; color: black !important; 
+      padding: 0 !important; height: 100px;
+    }
+
+    ul { 
+      list-style: none; width: 100% !important; 
+      text-align: right; 
+    }
+
+    ul li { display: inline-block; margin-right: 20px;}
+
+    ul li a {
+      color: black !important; margin-top: 10px; 
+      font-size: 22px; text-align: center; 
+    } 
+    
+    .navmenu a:hover:not(.active) { border-bottom: 2px solid #083dad; color: #083dad !important; margin-top: 12px !important;}
+
+    .active {
+      background-color: #7895B2; color: white !important;
+    }
+    .head1 {
+      color: #FBAD30;
+      font-size: 25px;
+      font-weight: bold;
+      height: 50px;
+    }
+
+    .prof {
+      font-weight: bold; text-decoration: none; color: #083dad !important;
+      background: linear-gradient(#B3F6D8, #52A7C1); line-height: 90px; margin-right: -20px;
+    }
+
+    .head2 {
+      color: #EF4926;
+      font-size: 25px;
+      font-weight: bold;
+    }
+    .navbar-nav {
+      margin-left: 20px;
+    }
+    
+    .spacicon {
+      margin-right: 10px;
+    }
+    .logout-btn {
+      color: black; margin-right: 10px; cursor: pointer;
+    } .logout-btn:hover { background-color: #4682B4; color: white !important;}
+
+    .swal-wide {
+      width: 550px !important;
+    }
+    .edit-btn { 
+      padding: 8px 12px; background-color: #083dad; color: white; transition: 0.3s ease-out; text-decoration: none;
+    }.edit-btn:hover { box-shadow: inset 0px 10px 10px rgba(0, 0, 0, 0.5); background-color: #083dad; color: white;}
+    .label-dsgn {
+      font-size: 20px; font-weight: 600; color: #083dad;
+    }
+    .portal-header {
+      margin-top: -30px; margin-left: 0px !important; padding: 0 !important;
+      border-bottom: 2px solid #083dad; color: #083dad; margin-bottom: 20px;
+    }
+    .portal-header2 {
+      margin-left: 10px !important; padding: 20px; width: 94%;
+      border-bottom: 2px solid #083dad; color: #083dad;
+    }
+    .submit-btn { 
+      padding: 12px 20px !important; background-color: #00BECC !important; color: white; transition: 0.3s ease-out;
+      display: inline-block; outline: none; border: none; font-size: 18px;
+    }.submit-btn:hover { box-shadow: inset 0px 10px 10px rgba(0, 0, 0, 0.5); background-color: #4682B4  !important; color: white;}
+    .back-btn {
+      padding: 11px 17px; background-color: none !important; color: black; transition: 0.3s ease-out;
+      border: 2px solid gray; outline: none; display: inline-block; margin-right: 20px; font-size: 18px;
+    }.back-btn:hover { background-color: gray; color: white;}
+    
+  body { background-color: #6D8299;}
+
+.titlepage {
+    color: #7895B2 !important; font-family: 'Poppins', sans-serif;
+    margin-left: 60px !important; transform: scale(1.1,1); font-size: 48px;
+    }
+  </style>
+  {% block css %}
+  {% endblock %}
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg  sticky-top">
+    
+        <a class="job navbar-brand text-primary mx-3 titlepage" href="#">NosAscend PH</a>    
+          <ul>
+            <li class="nav-item navmenu">
+              <a class="nav-link {% block home %}{% endblock %}" aria-current="page" href="/user_homepage/">Home</a>
+            </li>
+            <li class="nav-item navmenu">
+              <a class="nav-link {% block job_list %}{% endblock %}" href="/all_jobs/">Job List</a>
+            </li>
+            <li class="nav-item navmenu">           
+              <a class="nav-link" id="logout-btn"><i class="fa-solid fa-right-from-bracket spacicon"></i>Logout</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link prof" href="#" style="cursor: default;"><i class="fa-solid fa-user spacicon"></i>{{request.user.get_full_name}}</a>
+            </li>
+            
+          </ul>
+        
+  </nav>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+
+    <script>
+      document.getElementById("logout-btn").onclick = function(){
+    Swal.fire({
+    title: 'Are you sure you want to log out?',
+    text: "",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#3085d6',
+    customClass: 'swal-wide',
+    confirmButtonText: 'Log out'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      window.location.href = "/logout/";
+    }
+  })
+  }
+    </script>
+
+  {% block body %}
+  {% endblock %}
+</body>
+{% block js %}
+{% endblock %}
+
+</html>
+
+</html>
